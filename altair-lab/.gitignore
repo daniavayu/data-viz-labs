@@ -1,0 +1,3 @@
+*.pyc
+.ipynb_checkpoints
+data/actions_il-in-mi-wi_2021-2024.csv
