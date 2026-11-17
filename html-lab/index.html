@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
     <meta charset="UTF-8">
@@ -6,54 +6,99 @@
     <title>HTML Lab</title>
     <style>
       /* Part 2 CSS should all be within this tag. */
+      h1 {
+          color: rgb(157, 3, 57);
+          font-size: 30px;
+      }
+      .main-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+      }
+      nav li {
+          display: inline;
+      }
+      nav li a{
+          margin-right: 10px;
+          padding: 50px;
+          color: black;
+          text-decoration: none;
+      }
+      body {
+          font-family: Arial, sans-serif;
+          background-color: rgb(86, 106, 86);
+      }
+      img {
+          max-width: 100%;
+          height: auto;
+      }
+      div.gallery {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 10px;
+      }
+      section {
+          margin-bottom: 40px;
+          padding: 20px;    
+          border: 3px double black;
+      } 
     </style>
 </head>
 <body>
     <header>
-        <h1>My Favorite Pictures - A Collection of Images I Like</h1>
-        <ul>
-            <li>Flowers</li>
-            <li>Katsushika Hokusai</li>
-            <li>Original Art</li>
-        </ul>
+        <h1>Things I Like</h1>
+    </header>
+    <div class="main-grid">
+        <nav>
+            <ul>
+                <li><a href="#flowers">Flowers</a></li>
+                <li><a href="#hokusai">Katsushika Hokusai</a></li>
+                <li><a href="#original">Original Art</a></li>
+            </ul>
+        </nav>
         <main>
+        <section id="flowers">
         <h2>Flowers!!</h2>
         <div class="gallery">
             <div class="gallery-item">
                 <figure>
-                    <img src="images/1.jpg" alt="Flower 1" width="200">
-                    <figcaption>  <a href="https://www.artic.edu/artworks/100226/daisies">Henri Matisse</a>, Daisies</figcaption>
+                    <img src="images/1.jpg" alt="Daisies by Henri Matisse" width="200">
+                    <figcaption><a href="https://www.artic.edu/artworks/100226/daisies">Henri Matisse</a>, Daisies</figcaption>
                 </figure>
             </div>
-        <div class="gallery">
             <div class="gallery-item">
                 <figure>
-                    <img src="images/2.jpg" alt="Flower 1" width="200">
-                    <figcaption>  <a href="https://www.artic.edu/artworks/14817/flowers">Julian Alden Weir</a>, Flowers</figcaption>
+                    <img src="images/2.jpg" alt="Flowers by Julian Alden Weir" width="200">
+                    <figcaption><a href="https://www.artic.edu/artworks/14817/flowers">Julian Alden Weir</a>, Flowers</figcaption>
                 </figure>
             </div>
-        <div class="gallery">
             <div class="gallery-item">
                 <figure>
-                    <img src="images/3.jpg" alt="Flower 1" width="200">
-                    <figcaption>  <a href="https://www.artic.edu/artworks/48616/basket-of-flowers">Raoul Dufy</a>, Basket of Flowers</figcaption>
+                    <img src="images/3.jpg" alt="Basket of Flowers by Raoul Dufy" width="200">
+                    <figcaption><a href="https://www.artic.edu/artworks/48616/basket-of-flowers">Raoul Dufy</a>, Basket of Flowers</figcaption>
                 </figure>
             </div>
-        <div class="gallery">
             <div class="gallery-item">
                 <figure>
-                    <img src="images/4.jpg" alt="Flower 1" width="200">
-                    <figcaption>  <a href="https://www.artic.edu/artworks/25752/flowers">Anne Allen</a>, Flowers</figcaption>
+                    <img src="images/4.jpg" alt="Flowers by Anne Allen" width="200">
+                    <figcaption><a href="https://www.artic.edu/artworks/25752/flowers">Anne Allen</a>, Flowers</figcaption>
                 </figure>
             </div>
-        <div class="gallery">
             <div class="gallery-item">
                 <figure>
-                    <img src="images/5.jpg" alt="Flower 1" width="200">
-                    <figcaption>  <a href="https://www.artic.edu/artworks/97933/water-lily-pond">Claude Monet </a>, Water Lily Pond</figcaption>
+                    <img src="images/5.jpg" alt="Water Lily Pond by Claude Monet" width="200">
+                    <figcaption><a href="https://www.artic.edu/artworks/97933/water-lily-pond">Claude Monet</a>, Water Lily Pond</figcaption>
                 </figure>
             </div>
-        </nav>
+                </figure>
+            <div class="gallery-item">
+                <figure>
+                    <img src="images/11.jpg" alt="Water Lily Pond by Claude Monet" width="200">
+                    <figcaption><a href="https://www.artic.edu/artworks/196939/cherry-blossoms-and-lantern">Claude Monet</a>, Cherry Blossoms and Lantern</figcaption>
+                </figure>
+            </div>
+        </div>
+        </section>
+        <section id="hokusai">
         <h2>Katsushika Hokusai 葛飾 北斎</h2>
         <div class="gallery">
             <div class="gallery-item">
@@ -86,9 +131,19 @@
                     <figcaption><a href="https://www.artic.edu/artworks/47407/the-mansion-of-the-plates-sara-yashiki-from-the-series-one-hundred-ghost-tales-hyaku-monogatari">Katsushika Hokusai</a>, The Mansion of the Plates</figcaption>
                 </figure>
             </div>
+            <div class="gallery-item">
+                <figure>
+                    <img src="images/12.jpg" alt="Clearing Weather at Awazu" width="200">
+                    <figcaption><a href="https://www.artic.edu/artworks/57283/clearing-weather-at-awazu-awazu-no-seiran-from-the-series-eight-views-of-omi-in-etching-style-doban-omi-hakkei">Katsushika Hokusai</a>, The Mansion of the Plates</figcaption>
+                </figure>
+            </div>
         </div>
+        </section>
+        <section id="original">
+        <h2>Original Art</h2>
+        </section>
         </main>
-    </header>
+    </div>
 <!-- Part 1 Content should all be within the body -->
 
 </body>
