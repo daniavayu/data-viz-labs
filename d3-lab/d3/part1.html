@@ -98,7 +98,27 @@
           .attr("viewBox", "0 0 200 100");
 
         // WRITE SOLUTION TO 1.1 BELOW
-        d3.selectAll("rect");
+
+        // Select all existing rectangles, join them with the cities, and create missing ones
+        div11
+            .selectAll("rect")
+            .data(cities)
+            .join("rect")
+            .attr("width",d=>x(d.population))
+            .attr("y",(d,i)=>i*20)
+            .attr("height", 15);
+
+        div11
+            .selectAll("text")
+            .data(cities)
+            .join("text")
+            .attr("x", 2)
+            .attr("y", (d,i)=>i*20 + 10)
+            .style("fill","white")
+            .style("font-size", "7px")
+            .text(d=>d.city);
+
+        //d3.selectAll("rect");
       </script>
     </section>
 
@@ -119,10 +139,35 @@
           .append("svg")
           .attr("width", 200)
           .attr("height", 100)
-          .attr("viewBox", "0 0 200 100");
+          .attr("viewBox", "-10 0 220 100");
 
         // WRITE SOLUTION TO 1.2 BELOW
         // (you can copy/paste 1.1 to start this one)
+        div12
+            .selectAll("rect")
+            .data(cities)
+            .join("rect")
+            .attr("width",d=>x(d.population))
+            .attr("y",(d,i)=>i*16)
+            .attr("height", 12);
+
+        div12
+            .selectAll("text")
+            .data(cities)
+            .join("text")
+            .attr("x", 2)
+            .attr("y", (d,i)=>i*16 + 10)
+            .style("fill","white")
+            .style("font-size", "7px")
+            .text(d=>d.city);
+
+    
+        div12
+            // Append a group element which is a box to draw the axis
+            .append("g")
+            .attr("transform", "translate(0,80)")
+            .attr("font-size", "3px")
+            .call(d3.axisBottom(x).ticks(3).tickFormat(d3.format("~s")));
       </script>
     </section>
 
