@@ -139,7 +139,7 @@
           .append("svg")
           .attr("width", 200)
           .attr("height", 100)
-          .attr("viewBox", "-10 0 220 100");
+          .attr("viewBox", "-10 -8 220 100");
 
         // WRITE SOLUTION TO 1.2 BELOW
         // (you can copy/paste 1.1 to start this one)
@@ -166,8 +166,26 @@
             // Append a group element which is a box to draw the axis
             .append("g")
             .attr("transform", "translate(0,80)")
-            .attr("font-size", "3px")
+            .attr("font-size", "2px")
             .call(d3.axisBottom(x).ticks(3).tickFormat(d3.format("~s")));
+        
+        div12
+            .append("text")
+            .attr("x", 100)
+            .attr("y", 104)
+            .attr("text-anchor", "middle")
+            .attr("font-size", 10)
+            .text("Population");
+
+        div12
+            .append("text")
+            .attr("x", 100)
+            .attr("y", -5)
+            .attr("text-anchor", "middle")
+            .attr("font-size", 8)
+            .attr("font-weight", "bold")
+            .text("Population of Cities");
+
       </script>
     </section>
 
