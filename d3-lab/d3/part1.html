@@ -43,14 +43,24 @@
           .attr("height", 100)
           .attr("viewBox", "0 0 200 100");
 
+        // Test manual bars
+        // div10.append("rect").attr("y", 0).attr("width", 100).attr("height", 15);    
+        // div10.append("rect").attr("y", 20).attr("width", 80).attr("height", 15);
+
         // WRITE SOLUTION TO 1.0 BELOW
 
         // Step 1: Create a Linear Scale function to map population to SVG units
         // See https://d3js.org/d3-scale/linear#_linear
 
+        const x = d3.scaleLinear().domain([0, 10000000]).range([0, 200]);
+
         // note: for-of is akin to a Python for-in loop
         for (let city of cities) {
+            let i = cities.indexOf(city);
+
+            div10.append("rect").attr("y", i * 20).attr("width", x(city.population)).attr("height", 15);
           // Step 2: append a rect & text element for each one
+          div10.append("text").attr("x", 2).attr("y", i * 20 + 10).style("fill","white").style("font-size", "7px").text(city.city);
         }
       </script>
     </section>
