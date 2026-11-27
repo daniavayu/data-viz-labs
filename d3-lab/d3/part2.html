@@ -33,7 +33,7 @@
       </ol>
 
       <!-- Step 1: add reference image -->
-      <img src="your-chart-here.png" />
+      <img src="image.png" />
 
       <div id="part2"></div>
 
@@ -44,15 +44,110 @@
         If you are using more data, look at 
         https://d3js.org/d3-fetch to load from a file added to this repo.
         */
+const data = [
+  { decile: "D1",  group: "Poorest 10%",   income2015: 1.88,  income2025: 1.96,   growth: 4.1 },
+  { decile: "D2",  group: "Other deciles", income2015: 3.14,  income2025: 3.81,   growth: 21.1 },
+  { decile: "D3",  group: "Other deciles", income2015: 4.08,  income2025: 5.18,   growth: 26.9 },
+  { decile: "D4",  group: "Other deciles", income2015: 5.16,  income2025: 6.53,   growth: 26.4 },
+  { decile: "D5",  group: "Other deciles", income2015: 6.62,  income2025: 8.29,   growth: 25.3 },
+  { decile: "D6",  group: "Other deciles", income2015: 8.73,  income2025: 10.95,  growth: 25.5 },
+  { decile: "D7",  group: "Other deciles", income2015: 12.08, income2025: 15.35,  growth: 27.1 },
+  { decile: "D8",  group: "Other deciles", income2015: 18.23, income2025: 23.24,  growth: 27.5 },
+  { decile: "D9",  group: "Other deciles", income2015: 32.9,  income2025: 40.2,   growth: 22.2 },
+  { decile: "D10", group: "Other deciles", income2015: 88.76, income2025: 103.42, growth: 16.5 },
+];
 
-        /*
-        Step 3: Re-create the chart:
-          - Create an SVG element inside div#part2
-          - Use a data join against the data loaded in step 2 to create the chart elements.
-          - Add axes & labels as needed.
+        // Step 3: draw the chart
 
-          Tip: https://d3-graph-gallery.com/graph/custom_legend.html might be helpful for considering how to build a legend.
-        */
+        // Create the svg inside the div
+        const svg = d3
+          .select("#part2")
+          .append("svg")
+          .attr("width", 1400)
+          .attr("height", 450);
+
+        // Group moved 70px right and 80px down, to leave room for the axes
+        // The chart area is 1300 wide and 310 tall
+        const chart = svg.append("g").attr("transform", "translate(70, 80)");
+
+        // Scales
+        const x = d3
+          .scaleBand()
+          .domain(data.map((d) => d.decile))
+          .range([0, 1300])
+          .padding(0.25);
+
+        // y is upside down: 0 goes at the bottom (310), 32 at the top (0)
+        const y = d3.scaleLinear().domain([0, 32]).range([310, 0]);
+
+        // Axes
+        chart.append("g").attr("transform", "translate(0, 310)").call(d3.axisBottom(x));
+        chart.append("g").call(d3.axisLeft(y));
+
+        // Tooltip: a box that starts invisible and shows up when hovering a bar
+        const tooltip = d3
+          .select("body")
+          .append("div")
+          .style("position", "absolute")
+          .style("background", "white")
+          .style("border", "1px solid gray")
+          .style("padding", "5px")
+          .style("pointer-events", "none")
+          .style("opacity", 0);
+
+        // Bars (blue for the poorest 10%, gray for the rest)
+        chart
+          .selectAll("rect")
+          .data(data)
+          .join("rect")
+          .attr("x", (d) => x(d.decile))
+          .attr("y", (d) => y(d.growth))
+          .attr("width", x.bandwidth())
+          .attr("height", (d) => 310 - y(d.growth))
+          .attr("fill", (d) => (d.group === "Poorest 10%" ? "#58a6ea" : "#a0a0a0"))
+          .on("mouseover", function (event, d) {
+            // show the box with the incomes of this decile
+            d3.select(this).attr("opacity", 0.7);
+            tooltip.style("opacity", 1);
+            tooltip.html(
+              d.decile + "<br>2015: $" + d.income2015 + "<br>2025: $" + d.income2025
+            );
+          })
+          .on("mousemove", function (event) {
+            // the box follows the mouse
+            tooltip.style("left", event.pageX + 10 + "px");
+            tooltip.style("top", event.pageY - 30 + "px");
+          })
+          .on("mouseout", function () {
+            d3.select(this).attr("opacity", 1);
+            tooltip.style("opacity", 0);
+          });
+
+        // Growth % above each bar
+        chart
+          .selectAll(".label")
+          .data(data)
+          .join("text")
+          .attr("class", "label")
+          .attr("x", (d) => x(d.decile) + x.bandwidth() / 2)
+          .attr("y", (d) => y(d.growth) - 6)
+          .attr("text-anchor", "middle")
+          .attr("font-weight", "bold")
+          .text((d) => d.growth + "%");
+
+        // Axis titles
+        chart
+          .append("text")
+          .attr("x", 650)
+          .attr("y", 355)
+          .attr("text-anchor", "middle")
+          .text("Global income decile (D1 = poorest)");
+
+        chart
+          .append("text")
+          .attr("transform", "translate(-50, 155) rotate(-90)")
+          .attr("text-anchor", "middle")
+          .text("Income growth, 2015-2025 (%)");
       </script>
     </section>
   </body>
